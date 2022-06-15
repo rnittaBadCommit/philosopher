@@ -1,18 +1,18 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rnitta <rnitta@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/21 01:23:00 by rnitta            #+#    #+#             */
-/*   Updated: 2022/06/08 13:37:34 by rnitta           ###   ########.fr       */
-/*                                                                            */
+/*																			*/
+/*														:::	  ::::::::   */
+/*   ft_free.c										  :+:	  :+:	:+:   */
+/*													+:+ +:+		 +:+	 */
+/*   By: rnitta <rnitta@student.42.fr>			  +#+  +:+	   +#+		*/
+/*												+#+#+#+#+#+   +#+		   */
+/*   Created: 2022/04/21 01:23:00 by rnitta			#+#	#+#			 */
+/*   Updated: 2022/06/08 13:37:34 by rnitta		   ###   ########.fr	   */
+/*																			*/
 /* ************************************************************************** */
 
 #include "ft_malloc.h"
 
-t_list	*save_list();
+t_list	*save_list(void);
 
 static void	_ft_free_all_process(t_list *list)
 {
@@ -52,7 +52,7 @@ static int	_ft_free_process(t_list *list, void *p)
 
 int	ft_free(void *p)
 {
-	t_list *list;
+	t_list	*list;
 
 	list = save_list();
 	if (list->next)

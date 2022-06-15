@@ -2,7 +2,7 @@
 
 void	ft_bzero(void *p, size_t size)
 {
-	char *s;
+	char	*s;
 
 	s = (char *)p;
 	while (size-- > 0)
@@ -11,4 +11,3 @@ void	ft_bzero(void *p, size_t size)
 		s++;
 	}
 }
-

@@ -1,6 +1,7 @@
 #include "../../philosopher.h"
 
-static void	_set_philosopher_arry(t_philosopher *philosopher_arry, t_philosopher_data data, char **argv, t_err *err)
+static void	_set_philosopher_arry(t_philosopher *philosopher_arry, \
+	t_philosopher_data data, char **argv, t_err *err)
 {
 	int	i;
 
@@ -20,7 +21,8 @@ static void	_set_philosopher_arry(t_philosopher *philosopher_arry, t_philosopher
 	}
 }
 
-static void	_set_philosopher_data(t_philosopher_data *data, char **argv, t_err *err)
+static void	_set_philosopher_data(t_philosopher_data *data, \
+	char **argv, t_err *err)
 {
 	data->num_philosophers = ft_atoi(argv[1], err);
 	data->time_to_die = ft_atoi(argv[2], err);
@@ -29,9 +31,10 @@ static void	_set_philosopher_data(t_philosopher_data *data, char **argv, t_err *
 	data->is_additional_args = (argv[5] != NULL);
 }
 
-static t_philosopher	*_make_philosopher_arry(int num_philosophers, t_err *err)
+static t_philosopher	*_make_philosopher_arry(int num_philosophers, \
+	t_err *err)
 {
-	t_philosopher *ret;
+	t_philosopher	*ret;
 
 	ret = ft_malloc(sizeof(t_philosopher) * (num_philosophers + 1));
 	if (ret == NULL)
@@ -39,12 +42,14 @@ static t_philosopher	*_make_philosopher_arry(int num_philosophers, t_err *err)
 	return (ret);
 }
 
-t_err    set_philosophers(t_all *all, char **argv)
+t_err	set_philosophers(t_all *all, char **argv)
 {
-    _set_philosopher_data(&all->philosopher_data, argv, &all->err);
-	all->philosopher_arry = _make_philosopher_arry(all->philosopher_data.num_philosophers, &all->err);
+	_set_philosopher_data(&all->philosopher_data, argv, &all->err);
+	all->philosopher_arry = _make_philosopher_arry(\
+		all->philosopher_data.num_philosophers, &all->err);
 	if (all->err != NO_ERR)
 		return (all->err);
-	_set_philosopher_arry(all->philosopher_arry, all->philosopher_data, argv, &all->err);
+	_set_philosopher_arry(all->philosopher_arry, \
+		all->philosopher_data, argv, &all->err);
 	return (all->err);
 }

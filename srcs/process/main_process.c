@@ -1,6 +1,6 @@
 #include "../../philosopher.h"
 
-t_err   main_process(t_all *all)
+t_err	main_process(t_all *all)
 {
-    return (all->err);
+	return (all->err);
 }

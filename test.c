@@ -15,7 +15,7 @@ void *f(void *p)
 
 	for (int i = 0; i < 10000; ++i)
 	{
-        // lock ~ unlock の中の処理を動かせるのは1人だけ。lock()で待機する。
+		// lock ~ unlock の中の処理を動かせるのは1人だけ。lock()で待機する。
 		pthread_mutex_lock(t->mutex);
 		++*t->cnt;
 		pthread_mutex_unlock(t->mutex);
@@ -33,7 +33,7 @@ int main()
 	pthread_mutex_t mutex;
 	pthread_mutex_init(&mutex, NULL);
 
-    // pthreadに、 cnt と mutex を渡したいので構造体にいれる。
+	// pthreadに、 cnt と mutex を渡したいので構造体にいれる。
 	t_mut t;
 	t.mutex = &mutex;
 	t.cnt = &cnt;
