@@ -1,15 +1,17 @@
 #include "../../philosopher.h"
 
-int _is_valid_args_num(int argc, char **argv)
+int _is_valid_args_num(int argc, char **argv, t_err *err)
 {
     int philosopher_num;
-    t_err err;
 
-    philosopher_num = ft_atoi(argv[1], &err);
-    if (err != NO_ERR)
+    philosopher_num = ft_atoi(argv[1], err);
+    if (*err != NO_ERR)
         return (INVALID);
     else if (argc != DEFAULT_ARGS_NUM && argc != DEFAULT_ARGS_NUM + philosopher_num)
+    {
+        *err = INVALID_ARG_NUM;
         return (INVALID);
+    }
     else
         return (VALID);
 }
@@ -25,25 +27,30 @@ int _is_all_digits(char *s)
     return (TRUE);
 }
 
-int _is_valid_args_value(char **argv)
+int _is_empty_string(char *s)
 {
-    while (*argv)
+    return (*s == '\0');
+}
+
+int _is_valid_args_value(char **argv, t_err *err)
+{
+    while (*(++argv))
     {
-        if (!_is_all_digits(*argv))
+        if (_is_empty_string(*argv) || !_is_all_digits(*argv))
+        {
+            *err = INVALID_ARG_VALUE;
             return (INVALID);
-        argv++;
+        }
     }
     return (VALID);
 }
 
 int is_valid_args(int argc, char **argv, t_err *err)
 {
-    if (_is_valid_args_value(argv) == INVALID)
-        *err = INVALID_ARG_VALUE;
-    else if (_is_valid_args_num(argc, argv) == INVALID)
-        *err = INVALID_ARG_NUM;
-    if (*err == NO_ERR)
-        return (VALID);
-    else
+    if (_is_valid_args_value(argv, err) == INVALID)
         return (INVALID);
+    else if (_is_valid_args_num(argc, argv, err) == INVALID)
+        return (INVALID);
+    else
+        return (VALID);
 }
