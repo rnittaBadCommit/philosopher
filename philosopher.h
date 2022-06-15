@@ -1,12 +1,14 @@
 #ifndef PHILOSOPHER_H
 # define PHILOSOPHER_H
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <pthread.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <pthread.h>
 
-# include "./ft_malloc/ft_malloc.h"
+# include <limits.h>
+
+# include "./srcs/ft_malloc/ft_malloc.h"
 
 # define VALID 1
 # define INVALID 0
@@ -39,9 +41,13 @@ typedef enum e_err
 {
     NO_ERR,
 	MALLOC_FAIL,
-
+	INPUT_NULL_POINTER,
+	OVER_FLOW,
+	NO_DIGITS,
+	
     INVALID_ARG_NUM,
     INVALID_ARG_VALUE,
+	ANOTHER_ERR,
     SENTINEL,
 } t_err;
 
@@ -54,10 +60,13 @@ typedef struct s_all
 
 //main
 void    ft_finalize(t_all *all);
-void    ft_finalize(t_all *all);
 
 //check
 int is_valid_args(int argc, char **argv, t_err *err);
+
+//set
+t_err	set_all(t_all *all, char **argv);
+t_err    set_philosophers(t_all *all, char **argv);
 
 //process
 t_err	main_process(t_all *all);
@@ -66,6 +75,7 @@ t_err	main_process(t_all *all);
 int ft_error(t_all *all);
 
 //utils
-int	ft_atoi(int n, t_err *err);
+int	ft_atoi(char *s, t_err *err);
+void	ft_bzero(void *p, size_t size);
 
 #endif
