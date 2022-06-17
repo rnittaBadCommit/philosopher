@@ -22,4 +22,6 @@ int	main(int argc, char **argv)
 		return (ft_error(&all));
 	if (start_threads(&all) != NO_ERR)
 		return (ft_error(&all));
+	ft_finalize(&all);
+	return (0);
 }
