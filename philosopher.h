@@ -37,7 +37,7 @@ typedef struct s_philosopher_data
 	int	time_to_die;
 	int	time_to_eat;
 	int	time_to_sleep;
-	int	is_additional_args;
+	int	num_eat_time;
 	int	start_time;
 }	t_philosopher_data;
 
@@ -57,8 +57,9 @@ typedef enum e_err
 typedef struct s_all
 {
 	t_err				err;
-	t_philosopher		*philosopher_arry;
 	t_philosopher_data	philosopher_data;
+	pthread_mutex_t		*fork;
+	t_philosopher		*philosopher_arry;
 }	t_all;
 
 //main
@@ -69,10 +70,17 @@ int		is_valid_args(int argc, char **argv, t_err *err);
 
 //set
 t_err	set_all(t_all *all, char **argv);
-t_err	set_philosophers(t_all *all, char **argv);
+void	set_philosopher_data(t_philosopher_data *data, \
+	char **argv, t_err *err);
+pthread_mutex_t		*make_fork(int num_philosophers);
+t_philosopher	*make_philosopher_arry(int num_philosophers, \
+	t_err *err);
+void	set_philosopher_arry(t_philosopher *philosopher_arry, \
+	t_philosopher_data *data, pthread_mutex_t *fork);
 
 //process
 t_err	main_process(t_all *all);
+void	moniter_philosophers();
 
 //error
 int		ft_error(t_all *all);

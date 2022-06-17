@@ -7,7 +7,7 @@ FLAG_LEAK_CHECK=-g3
 
 SRC_MAIN=./srcs/main/main.c
 SRC_CHECK_ARGS=./srcs/check_args/check_args.c
-SRC_SET_PARAMS=./srcs/set_params/set_all.c ./srcs/set_params/set_philosophers.c
+SRC_SET_PARAMS=./srcs/set_params/set_all.c ./srcs/set_params/set_philosopher_data.c ./srcs/set_params/make_fork.c ./srcs/set_params/set_philosophers.c 
 SRC_PROCESS=./srcs/process/main_process.c
 SRC_ERROR=./srcs/error/error.c
 SRC_FT_MALLOC=./srcs/ft_malloc/ft_free.c ./srcs/ft_malloc/ft_malloc.c
