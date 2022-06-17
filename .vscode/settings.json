@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "philosopher.h": "c",
+        "ft_malloc.h": "c"
+    }
+}
