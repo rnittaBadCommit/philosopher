@@ -1,23 +1,11 @@
 #include "../../philosopher.h"
 
-int	_is_valid_args_num(int argc, char **argv, t_err *err)
+int	_is_valid_args_num(int argc)
 {
-	int	philosopher_num;
-
-	philosopher_num = ft_atoi(argv[1], err);
-	if (*err != NO_ERR)
-	{
-		*err = INVALID_ARG_NUM;
-		return (INVALID);
-	}
-	if (argc != DEFAULT_ARGS_NUM && \
-		argc != DEFAULT_ARGS_NUM + philosopher_num)
-	{
-		*err = INVALID_ARG_NUM;
-		return (INVALID);
-	}
-	else
+	if (argc == 5 || argc == 6)
 		return (VALID);
+	else
+		return (INVALID);
 }
 
 int	_is_all_digits(char *s)
@@ -51,9 +39,9 @@ int	_is_valid_args_value(char **argv, t_err *err)
 
 int	is_valid_args(int argc, char **argv, t_err *err)
 {
-	if (_is_valid_args_value(argv, err) == INVALID)
+	if (_is_valid_args_num(argc) == INVALID)
 		return (INVALID);
-	else if (_is_valid_args_num(argc, argv, err) == INVALID)
+	else if (_is_valid_args_value(argv, err) == INVALID)
 		return (INVALID);
 	else
 		return (VALID);
