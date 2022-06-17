@@ -6,8 +6,11 @@ int	_is_valid_args_num(int argc, char **argv, t_err *err)
 
 	philosopher_num = ft_atoi(argv[1], err);
 	if (*err != NO_ERR)
+	{
+		*err = INVALID_ARG_NUM;
 		return (INVALID);
-	else if (argc != DEFAULT_ARGS_NUM && \
+	}
+	if (argc != DEFAULT_ARGS_NUM && \
 		argc != DEFAULT_ARGS_NUM + philosopher_num)
 	{
 		*err = INVALID_ARG_NUM;
