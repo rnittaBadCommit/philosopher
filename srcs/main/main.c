@@ -20,6 +20,6 @@ int	main(int argc, char **argv)
 		return (ft_error(&all));
 	if (set_all(&all, argv) != NO_ERR)
 		return (ft_error(&all));
-	if (main_process(&all) != NO_ERR)
+	if (start_threads(&all) != NO_ERR)
 		return (ft_error(&all));
 }

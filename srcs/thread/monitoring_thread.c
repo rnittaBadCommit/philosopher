@@ -17,11 +17,22 @@ int	_get_dead_philosopher_id(t_philosopher *philosopher_arry, int num_philosophe
 	return (NO_DEAD);
 }
 
-void	moniter_philosophers(void *p)
+static int	_is_exist_not_finished_philosopher(t_philosopher *philosopher_arry, int num_philosopher)
+{
+	int	i;
+
+	i = 0;
+	while (i < num_philosopher)
+	{
+		if (philosopher_arry[i].num_eat_left != 0)
+			return (1);
+	}
+	return (0);
+}
+
+void	*monitoring_threads(void *p)
 {
 	t_all			*all;
-	t_philosopher	*philosopher_arry;
-	int				i;
 	int				dead_philosopher_id;
 
 	all = p;
@@ -34,5 +45,10 @@ void	moniter_philosophers(void *p)
 			//死亡を検知した際の処理
 			break;
 		}
+		if (!_is_exist_not_finished_philosopher(all->philosopher_arry, all->philosopher_data.num_philosophers))
+		{
+			//全員食べ終わった際の処理
+		}
 	}
+	return (NULL);
 }

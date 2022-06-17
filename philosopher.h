@@ -25,6 +25,13 @@
 
 # define DEFAULT_ARGS_NUM 5
 
+
+typedef struct s_mutexes
+{
+	pthread_mutex_t	print;
+	pthread_mutex_t	is_finished;
+}	t_mutexes;
+
 typedef struct s_philosopher
 {
 	int	time_to_die;
@@ -34,10 +41,12 @@ typedef struct s_philosopher
 	int	time_die;
 	int	num_eat_left;
 	int	id;
+	pthread_t	thread;
+	long long int	start_time;
 	pthread_mutex_t	*fork_left;
 	pthread_mutex_t *fork_right;
 	t_mutexes *mutexes;
-	int	*is_finished;
+	int	*is_simulation_finished;
 }	t_philosopher;
 
 typedef struct s_philosopher_data
@@ -47,14 +56,8 @@ typedef struct s_philosopher_data
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	num_eat_time;
-	int	start_time;
+	long long int	start_time;
 }	t_philosopher_data;
-
-typedef struct s_mutexes
-{
-	pthread_mutex_t	print;
-	pthread_mutex_t	is_finished;
-}	t_mutexes;
 
 typedef enum e_err
 {
@@ -75,6 +78,7 @@ typedef struct s_all
 	t_philosopher_data	philosopher_data;
 	pthread_mutex_t		*fork;
 	t_philosopher		*philosopher_arry;
+	pthread_t			monitoring_thread;
 }	t_all;
 
 //main
@@ -94,8 +98,14 @@ void	set_philosopher_arry(t_philosopher *philosopher_arry, \
 	t_philosopher_data *data, pthread_mutex_t *fork);
 
 //process
-t_err	main_process(t_all *all);
-void	moniter_philosophers();
+t_err	start_threads(t_all *all);
+void	*monitoring_threads(void *p);
+
+//action
+void	philosopher_take_fork(t_philosopher *philosopher);
+void	philosopher_eat(t_philosopher *philosopher);
+void	philosopher_sleep(t_philosopher *philosopher);
+void	philosopher_think(t_philosopher *philosopher);
 
 //error
 int		ft_error(t_all *all);
@@ -104,5 +114,6 @@ int		ft_error(t_all *all);
 int		ft_atoi(char *s, t_err *err);
 void	ft_bzero(void *p, size_t size);
 long long int		ft_get_time_sec();
+void	print_log_mutex(t_philosopher *philosopher, char *s);
 
 #endif

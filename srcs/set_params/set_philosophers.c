@@ -15,6 +15,7 @@ void	set_philosopher_arry(t_philosopher *philosopher_arry, \
 		philosopher_arry[i].time_die = 0 + data->time_to_die;
 		philosopher_arry[i].num_eat_left = data->num_eat_time;
 		philosopher_arry[i].id = i + 1;
+		philosopher_arry[i].start_time = data->start_time;
 		if (i == 0)
 			philosopher_arry[i].fork_left = &fork[data->num_philosophers - 1];
 		else
