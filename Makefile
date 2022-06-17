@@ -11,7 +11,7 @@ SRC_SET_PARAMS=./srcs/set_params/set_all.c ./srcs/set_params/set_philosophers.c
 SRC_PROCESS=./srcs/process/main_process.c
 SRC_ERROR=./srcs/error/error.c
 SRC_FT_MALLOC=./srcs/ft_malloc/ft_free.c ./srcs/ft_malloc/ft_malloc.c
-SRC_UTILS=./srcs/utils/ft_atoi_err.c ./srcs/utils/ft_bzero.c
+SRC_UTILS=./srcs/utils/ft_atoi_err.c ./srcs/utils/ft_bzero.c ./srcs/utils/get_time.c
 
 SRCS=$(SRC_MAIN) $(SRC_CHECK_ARGS) $(SRC_SET_PARAMS) $(SRC_PROCESS) $(SRC_ERROR) $(SRC_FT_MALLOC) $(SRC_UTILS)
 OBJS = $(SRCS:.c=.o)
