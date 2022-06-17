@@ -6,6 +6,7 @@
 # include <unistd.h>
 # include <pthread.h>
 
+#include <sys/time.h>
 # include <limits.h>
 
 # include "./srcs/ft_malloc/ft_malloc.h"
@@ -25,6 +26,9 @@ typedef struct s_philosopher
 	int	time_last_eat;
 	int	time_die;
 	int	num_eat_left;
+	int	id;
+	pthread_mutex_t	*fork_left;
+	pthread_mutex_t *fork_right;
 }	t_philosopher;
 
 typedef struct s_philosopher_data
@@ -34,6 +38,7 @@ typedef struct s_philosopher_data
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	is_additional_args;
+	int	start_time;
 }	t_philosopher_data;
 
 typedef enum e_err
@@ -75,5 +80,6 @@ int		ft_error(t_all *all);
 //utils
 int		ft_atoi(char *s, t_err *err);
 void	ft_bzero(void *p, size_t size);
+int		ft_get_time_sec();
 
 #endif

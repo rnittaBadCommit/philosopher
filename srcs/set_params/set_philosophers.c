@@ -11,7 +11,7 @@ static void	_set_philosopher_arry(t_philosopher *philosopher_arry, \
 		philosopher_arry[i].time_to_die = data.time_to_die;
 		philosopher_arry[i].time_to_eat = data.time_to_eat;
 		philosopher_arry[i].time_to_sleep = data.time_to_sleep;
-		philosopher_arry[i].time_last_eat = 0;
+		philosopher_arry[i].time_last_eat = data.start_time;
 		philosopher_arry[i].time_die = 0 + data.time_to_die;
 		if (data.is_additional_args)
 			philosopher_arry[i].num_eat_left = ft_atoi(argv[5 + i], err);
@@ -29,6 +29,7 @@ static void	_set_philosopher_data(t_philosopher_data *data, \
 	data->time_to_eat = ft_atoi(argv[3], err);
 	data->time_to_sleep = ft_atoi(argv[4], err);
 	data->is_additional_args = (argv[5] != NULL);
+	data->start_time = ft_get_time_sec();
 }
 
 static t_philosopher	*_make_philosopher_arry(int num_philosophers, \
