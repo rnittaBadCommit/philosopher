@@ -6,7 +6,7 @@
 # include <unistd.h>
 # include <pthread.h>
 
-#include <sys/time.h>
+# include <sys/time.h>
 # include <limits.h>
 
 # include "./srcs/ft_malloc/ft_malloc.h"
@@ -15,6 +15,13 @@
 # define INVALID 0
 # define TRUE 1
 # define FALSE 0
+
+//printf_mutex
+# define MESSAGE_GET_FORK "has taken a fork"
+# define MESSAGE_EAT "is eating"
+# define MESSAGE_SLEEP "is sleeping"
+# define MESSAGE_THINK "is thinking"
+# define MESSAGE "died"
 
 # define DEFAULT_ARGS_NUM 5
 
@@ -29,6 +36,8 @@ typedef struct s_philosopher
 	int	id;
 	pthread_mutex_t	*fork_left;
 	pthread_mutex_t *fork_right;
+	t_mutexes *mutexes;
+	int	*is_finished;
 }	t_philosopher;
 
 typedef struct s_philosopher_data
@@ -40,6 +49,12 @@ typedef struct s_philosopher_data
 	int	num_eat_time;
 	int	start_time;
 }	t_philosopher_data;
+
+typedef struct s_mutexes
+{
+	pthread_mutex_t	print;
+	pthread_mutex_t	is_finished;
+}	t_mutexes;
 
 typedef enum e_err
 {
@@ -88,6 +103,6 @@ int		ft_error(t_all *all);
 //utils
 int		ft_atoi(char *s, t_err *err);
 void	ft_bzero(void *p, size_t size);
-int		ft_get_time_sec();
+long long int		ft_get_time_sec();
 
 #endif

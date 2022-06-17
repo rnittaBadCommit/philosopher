@@ -1,9 +1,9 @@
 #include "../../philosopher.h"
 
-int	ft_get_time_sec()
+long long int	ft_get_time_sec()
 {
 	struct timeval tv;
 
 	gettimeofday(&tv, NULL);
-	return (tv.tv_sec);
+	return ((long long)tv.tv_sec * 1000 + tv.tv_usec);
 }
