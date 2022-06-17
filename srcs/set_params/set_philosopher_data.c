@@ -12,4 +12,5 @@ void	set_philosopher_data(t_philosopher_data *data, \
 	else
 		data->num_eat_time = atoi(argv[5]);
 	data->start_time = ft_get_time_sec();
+	pthread_mutex_init(&data->mutexes.print, NULL);
 }

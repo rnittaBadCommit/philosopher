@@ -21,6 +21,8 @@ void	set_philosopher_arry(t_philosopher *philosopher_arry, \
 		else
 			philosopher_arry[i].fork_left = &fork[i - 1];
 		philosopher_arry[i].fork_right = &fork[i];
+		philosopher_arry[i].mutexes = &data->mutexes;
+		philosopher_arry[i].is_simulation_finished = &data->is_simutation_finished;
 		i++;
 	}
 }

@@ -29,7 +29,6 @@
 typedef struct s_mutexes
 {
 	pthread_mutex_t	print;
-	pthread_mutex_t	is_finished;
 }	t_mutexes;
 
 typedef struct s_philosopher
@@ -57,6 +56,8 @@ typedef struct s_philosopher_data
 	int	time_to_sleep;
 	int	num_eat_time;
 	long long int	start_time;
+	t_mutexes	mutexes;
+	int	is_simutation_finished;
 }	t_philosopher_data;
 
 typedef enum e_err
