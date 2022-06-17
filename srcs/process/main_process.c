@@ -1,6 +1,20 @@
 #include "../../philosopher.h"
 
-t_err	main_process(t_all *all)
+void	thread_main(void *p)
+{
+	t_philosopher *philosopher;
+
+	philosopher = p;
+	while (!*philosopher->is_finished)
+	{
+		philosopher_take_fork();
+		philosopher_eat();
+		philosopher_sleep();
+		philosopher_think();
+	}
+}
+
+t_err	start_threads(t_all *all)
 {
 	return (all->err);
 }
