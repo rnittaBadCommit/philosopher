@@ -15,6 +15,8 @@ int	ft_error(t_all *all)
 		printf("over flow happened\n");
 	else if (all->err == NO_DIGITS)
 		printf("atoi convert to 0 from no digits\n");
+	// else
+	// 	printf("%d", all->err);
 	ft_finalize(all);
 	return (-1);
 }

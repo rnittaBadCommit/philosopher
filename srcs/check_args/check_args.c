@@ -1,11 +1,14 @@
 #include "../../philosopher.h"
 
-int	_is_valid_args_num(int argc)
+int	_is_valid_args_num(int argc, t_err *err)
 {
 	if (argc == 5 || argc == 6)
 		return (VALID);
 	else
+	{
+		*err = INVALID_ARG_NUM;
 		return (INVALID);
+	}
 }
 
 int	_is_all_digits(char *s)
@@ -39,7 +42,7 @@ int	_is_valid_args_value(char **argv, t_err *err)
 
 int	is_valid_args(int argc, char **argv, t_err *err)
 {
-	if (_is_valid_args_num(argc) == INVALID)
+	if (_is_valid_args_num(argc, err) == INVALID)
 		return (INVALID);
 	else if (_is_valid_args_value(argv, err) == INVALID)
 		return (INVALID);
