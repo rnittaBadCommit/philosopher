@@ -6,7 +6,7 @@ void	print_log_mutex(t_philosopher *philosopher, char *s)
 		return;
 	pthread_mutex_lock(&philosopher->mutexes->print);
 	philosopher->actual_time_usec = ft_get_time_usec();
-	printf("%lld %d %s\n", philosopher->actual_time_usec / 1000 - philosopher->start_time, philosopher->id, s);
+	printf("%lld %d %s\n", (philosopher->ideal_time_usec - philosopher->start_time_usec) / 1000, philosopher->id, s);
 	pthread_mutex_unlock(&philosopher->mutexes->print);
-	philosopher->dt = philosopher->ideal_time_usec - philosopher->actual_time_usec;
+	// printf("ideal_time: %lld, dt: %lld\n", philosopher->ideal_time_usec - philosopher->start_time_usec, philosopher->dt);
 }

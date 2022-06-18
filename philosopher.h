@@ -33,18 +33,20 @@ typedef struct s_mutexes
 
 typedef struct s_philosopher
 {
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	long long int	time_last_eat;
+	int	time_to_die_usec;
+	int	time_to_eat_usec;
+	int	time_to_sleep_usec;
+	long long int	time_last_eat_usec;
 	int	time_die;
 	int	num_eat_left;
 	int	id;
 	pthread_t	thread;
-	long long int	start_time;
+	long long int	start_time_usec;
+	long long int	*start_time_addr;
 	pthread_mutex_t	*fork_left;
 	pthread_mutex_t *fork_right;
 	t_mutexes *mutexes;
+	volatile int	*is_simulation_started;
 	volatile int	*is_simulation_finished;
 	long long int	ideal_time_usec;
 	long long int	actual_time_usec;
@@ -55,11 +57,12 @@ typedef struct s_philosopher_data
 {
 	int	num_philosophers;
 	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
+	int	time_to_eat_usec;
+	int	time_to_sleep_usec;
 	int	num_eat_time;
-	long long int	start_time;
+	long long int	start_time_usec;
 	t_mutexes	mutexes;
+	int	is_simulation_started;
 	int	is_simutation_finished;
 }	t_philosopher_data;
 
@@ -120,5 +123,6 @@ void	ft_bzero(void *p, size_t size);
 long long int		ft_get_time_msec();
 long long int		ft_get_time_usec();
 void	print_log_mutex(t_philosopher *philosopher, char *s);
+void	ft_usleep(long long int sleep_time);
 
 #endif
