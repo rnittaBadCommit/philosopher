@@ -23,6 +23,11 @@ void	set_philosopher_arry(t_philosopher *philosopher_arry, \
 		philosopher_arry[i].fork_right = &fork[i];
 		philosopher_arry[i].mutexes = &data->mutexes;
 		philosopher_arry[i].is_simulation_finished = &data->is_simutation_finished;
+		if (philosopher_arry[i].id % 2)
+			philosopher_arry[i].ideal_time_usec = data->start_time;
+		else
+			philosopher_arry[i].ideal_time_usec = data->start_time + data->time_to_eat;
+		philosopher_arry[i].dt = 0;
 		i++;
 	}
 }

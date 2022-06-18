@@ -2,17 +2,30 @@
 
 #define NO_DEAD 0
 
+void	_print_log_mutex(t_philosopher *philosopher, char *s)
+{
+	pthread_mutex_lock(&philosopher->mutexes->print);
+	printf("%lld %d %s\n", (long long)ft_get_time_msec() - philosopher->start_time, philosopher->id, s);
+	pthread_mutex_unlock(&philosopher->mutexes->print);
+}
+
+
 int	_get_dead_philosopher_id(t_philosopher *philosopher_arry, int num_philosophers)
 {
-	int	time;
+	long long int	now;
 	int	i;
 
-	time = ft_get_time_sec();
+	now = ft_get_time_msec();
 	i = 0;
 	while (i < num_philosophers)
 	{
-		if (philosopher_arry[i].time_die <= time - philosopher_arry[i].time_last_eat)
+		// printf("%d %d\n", philosopher_arry[i].time_die, now - philosopher_arry[i].time_last_eat);
+		if (philosopher_arry[i].time_to_die <= now - philosopher_arry[i].time_last_eat)
+		{
+			printf("%d %lld %lld\n", philosopher_arry[i].time_to_die, now, philosopher_arry[i].time_last_eat);
 			return (philosopher_arry[i].id);
+		}
+		i++;
 	}
 	return (NO_DEAD);
 }
@@ -26,6 +39,7 @@ static int	_is_exist_not_finished_philosopher(t_philosopher *philosopher_arry, i
 	{
 		if (philosopher_arry[i].num_eat_left != 0)
 			return (1);
+		i++;
 	}
 	return (0);
 }
@@ -42,12 +56,16 @@ void	*monitoring_threads(void *p)
 		dead_philosopher_id = _get_dead_philosopher_id(all->philosopher_arry, all->philosopher_data.num_philosophers);
 		if (dead_philosopher_id != NO_DEAD)
 		{
-			//死亡を検知した際の処理
+			all->philosopher_data.is_simutation_finished = 1;
+			_print_log_mutex(&all->philosopher_arry[dead_philosopher_id - 1], MESSAGE_DIE);
 			break;
 		}
 		if (!_is_exist_not_finished_philosopher(all->philosopher_arry, all->philosopher_data.num_philosophers))
 		{
 			//全員食べ終わった際の処理
+			printf("finish eating\n");
+			all->philosopher_data.is_simutation_finished = 1;
+			break;
 		}
 	}
 	return (NULL);

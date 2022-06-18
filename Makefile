@@ -1,5 +1,5 @@
 NAME=a.out
-CC=cc -pthread
+CC=cc -g3 -pthread
 INCLUDE=
 FLAG=-Wall -Wextra -Werror -pthread
 

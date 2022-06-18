@@ -6,7 +6,9 @@ t_err	set_all(t_all *all, char **argv)
 	set_philosopher_data(&all->philosopher_data, argv, &all->err);
 	if (all->err)
 		return (all->err);
-	all->fork = make_fork(all->philosopher_data.num_philosophers);
+	all->fork = make_fork(all->philosopher_data.num_philosophers, &all->err);
+	if (all->err)
+		return (all->err);
 	all->philosopher_arry = make_philosopher_arry(all->philosopher_data.num_philosophers, &all->err);
 	if (all->err)
 		return (all->err);

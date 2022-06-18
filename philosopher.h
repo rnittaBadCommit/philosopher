@@ -21,7 +21,7 @@
 # define MESSAGE_EAT "is eating"
 # define MESSAGE_SLEEP "is sleeping"
 # define MESSAGE_THINK "is thinking"
-# define MESSAGE "died"
+# define MESSAGE_DIE "died"
 
 # define DEFAULT_ARGS_NUM 5
 
@@ -36,7 +36,7 @@ typedef struct s_philosopher
 	int	time_to_die;
 	int	time_to_eat;
 	int	time_to_sleep;
-	int	time_last_eat;
+	long long int	time_last_eat;
 	int	time_die;
 	int	num_eat_left;
 	int	id;
@@ -45,7 +45,10 @@ typedef struct s_philosopher
 	pthread_mutex_t	*fork_left;
 	pthread_mutex_t *fork_right;
 	t_mutexes *mutexes;
-	int	*is_simulation_finished;
+	volatile int	*is_simulation_finished;
+	long long int	ideal_time_usec;
+	long long int	actual_time_usec;
+	long long int	dt;
 }	t_philosopher;
 
 typedef struct s_philosopher_data
@@ -92,7 +95,7 @@ int		is_valid_args(int argc, char **argv, t_err *err);
 t_err	set_all(t_all *all, char **argv);
 void	set_philosopher_data(t_philosopher_data *data, \
 	char **argv, t_err *err);
-pthread_mutex_t		*make_fork(int num_philosophers);
+pthread_mutex_t		*make_fork(int num_philosophers, t_err *err);
 t_philosopher	*make_philosopher_arry(int num_philosophers, \
 	t_err *err);
 void	set_philosopher_arry(t_philosopher *philosopher_arry, \
@@ -114,7 +117,8 @@ int		ft_error(t_all *all);
 //utils
 int		ft_atoi(char *s, t_err *err);
 void	ft_bzero(void *p, size_t size);
-long long int		ft_get_time_sec();
+long long int		ft_get_time_msec();
+long long int		ft_get_time_usec();
 void	print_log_mutex(t_philosopher *philosopher, char *s);
 
 #endif
