@@ -6,7 +6,7 @@
 /*   By: rnitta <rnitta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 15:05:43 by rnitta            #+#    #+#             */
-/*   Updated: 2022/06/19 15:05:44 by rnitta           ###   ########.fr       */
+/*   Updated: 2022/06/19 15:12:26 by rnitta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 void	_print_log_mutex(t_philosopher *philosopher, char *s)
 {
-	pthread_mutex_lock(&philosopher->mutexes->print);
 	printf("%lld %d %s\n", (ft_get_time_usec() - \
 		philosopher->start_time_usec) / 1000, philosopher->id, s);
 	pthread_mutex_unlock(&philosopher->mutexes->print);
@@ -35,6 +34,7 @@ int	_get_dead_philosopher_id(t_philosopher *philosopher_arry, \
 		if (philosopher_arry[i].time_to_die_usec <= \
 			now - philosopher_arry[i].time_last_eat_usec)
 		{
+			pthread_mutex_lock(&philosopher_arry[i].mutexes->print);
 			return (philosopher_arry[i].id);
 		}
 		i++;
