@@ -6,7 +6,7 @@
 /*   By: rnitta <rnitta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 15:05:12 by rnitta            #+#    #+#             */
-/*   Updated: 2022/06/19 15:05:13 by rnitta           ###   ########.fr       */
+/*   Updated: 2022/06/19 16:42:49 by rnitta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int	main(int argc, char **argv)
 		return (ft_error(&all));
 	if (set_all(&all, argv) != NO_ERR)
 		return (ft_error(&all));
-	if (all.philosopher_data.num_eat_time == 0)
+	if (all.philosopher_data.num_eat_time == 0 || \
+		all.philosopher_data.num_philosophers == 0)
 		;
 	else if (all.philosopher_data.num_philosophers == 1)
 	{
