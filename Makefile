@@ -1,5 +1,5 @@
 NAME=philo
-CC=cc -g3 -pthread
+CC=cc -pthread
 INCLUDE=
 FLAG=-Wall -Wextra -Werror -pthread
 
