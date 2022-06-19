@@ -6,7 +6,7 @@
 /*   By: rnitta <rnitta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 15:05:12 by rnitta            #+#    #+#             */
-/*   Updated: 2022/06/19 17:33:33 by rnitta           ###   ########.fr       */
+/*   Updated: 2022/06/19 18:49:47 by rnitta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,27 @@ static void	_ini_all(t_all *all)
 	ft_bzero(all, sizeof(t_all));
 }
 
+static void	_destroy_all_mutex(t_all *all)
+{
+	int	i;
+
+	i = 0;
+	if (all->fork)
+	{
+		while (i < all->philosopher_data.num_philosophers)
+		{
+			pthread_mutex_destroy(&all->fork[i]);
+			i++;
+		}
+	}
+	pthread_mutex_destroy(&all->philosopher_data.mutexes.print);
+	pthread_mutex_destroy(&all->philosopher_data.mutexes.fork_id0);
+}
+
 void	ft_finalize(t_all *all)
 {
-	if (all)
-		ft_free_all();
+	_destroy_all_mutex(all);
+	ft_free_all();
 }
 
 int	main(int argc, char **argv)
