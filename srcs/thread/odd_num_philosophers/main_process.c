@@ -6,7 +6,7 @@
 /*   By: rnitta <rnitta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 15:05:38 by rnitta            #+#    #+#             */
-/*   Updated: 2022/06/19 15:05:39 by rnitta           ###   ########.fr       */
+/*   Updated: 2022/06/19 15:31:08 by rnitta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	*_thread_main(void *p)
 		usleep(10);
 	_set_philosopher(philosopher);
 	if (philosopher->id % 2 == 0)
-		usleep(200);
+		usleep(philosopher->time_to_eat_usec * 3 / 4);
 	if (philosopher->id == philosopher->num_philosopher)
 	{
 		usleep(philosopher->time_to_eat_usec / 2);
