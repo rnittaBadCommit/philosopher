@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rnitta <rnitta@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/19 15:05:12 by rnitta            #+#    #+#             */
+/*   Updated: 2022/06/19 15:05:13 by rnitta           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../philosopher.h"
 
 static void	_ini_all(t_all *all)
@@ -32,11 +44,9 @@ int	main(int argc, char **argv)
 		if (start_threads_odd_num(&all) != NO_ERR)
 			return (ft_error(&all));
 	}
-	else 
-	{
+	else
 		if (start_threads_even_num(&all) != NO_ERR)
 			return (ft_error(&all));
-	}
 	ft_finalize(&all);
 	return (0);
 }

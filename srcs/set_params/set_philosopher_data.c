@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_philosopher_data.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rnitta <rnitta@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/19 15:05:23 by rnitta            #+#    #+#             */
+/*   Updated: 2022/06/19 15:05:24 by rnitta           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../philosopher.h"
 
 static void	_change_time_ms_to_us(t_philosopher_data *data, t_err *err)
@@ -8,7 +20,7 @@ static void	_change_time_ms_to_us(t_philosopher_data *data, t_err *err)
 		data->time_to_die > INT_MAX / 1000)
 	{
 		*err = OVER_FLOW;
-		return;
+		return ;
 	}
 	data->time_to_eat_usec *= 1000;
 	data->time_to_sleep_usec *= 1000;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rnitta <rnitta@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/19 15:05:02 by rnitta            #+#    #+#             */
+/*   Updated: 2022/06/19 15:05:03 by rnitta           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../philosopher.h"
 
 int	ft_error(t_all *all)
@@ -15,8 +27,6 @@ int	ft_error(t_all *all)
 		printf("over flow happened\n");
 	else if (all->err == NO_DIGITS)
 		printf("atoi convert to 0 from no digits\n");
-	// else
-	// 	printf("%d", all->err);
 	ft_finalize(all);
 	return (-1);
 }
