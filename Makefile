@@ -1,4 +1,4 @@
-NAME=a.out
+NAME=philo
 CC=cc -g3 -pthread
 INCLUDE=
 FLAG=-Wall -Wextra -Werror -pthread
