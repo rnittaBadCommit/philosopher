@@ -6,7 +6,7 @@
 /*   By: rnitta <rnitta@student.42.fr>			  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2022/04/21 01:23:00 by rnitta			#+#	#+#			 */
-/*   Updated: 2022/04/21 15:24:28 by rnitta		   ###   ########.fr	   */
+/*   Updated: 2022/06/19 18:37:29 by rnitta           ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	*ft_malloc(size_t size)
 	if (!size)
 		return (NULL);
 	ret = malloc(size);
+	if (!ret)
+		return (NULL);
 	ft_bzero(ret, size);
 	_add_malloc_list(ret, index);
 	return (ret);
