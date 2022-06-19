@@ -8,10 +8,12 @@ FLAG_LEAK_CHECK=-g3
 SRC_MAIN=./srcs/main/main.c
 SRC_CHECK_ARGS=./srcs/check_args/check_args.c
 SRC_SET_PARAMS=./srcs/set_params/set_all.c ./srcs/set_params/set_philosopher_data.c ./srcs/set_params/make_fork.c ./srcs/set_params/set_philosophers.c 
-SRC_THREAD=./srcs/thread/main_process.c ./srcs/thread/monitoring_thread.c ./srcs/thread/action.c
+SRC_THREAD_ODD=./srcs/thread/odd_num_philosophers/main_process.c ./srcs/thread/odd_num_philosophers/action.c
+SRC_THREAD_EVEN=./srcs/thread/even_num_philosophers/main_process.c ./srcs/thread/even_num_philosophers/action.c
+SRC_THREAD=$(SRC_THREAD_ODD) $(SRC_THREAD_EVEN) ./srcs/thread/monitoring_thread.c
 SRC_ERROR=./srcs/error/error.c
 SRC_FT_MALLOC=./srcs/ft_malloc/ft_free.c ./srcs/ft_malloc/ft_malloc.c
-SRC_UTILS=./srcs/utils/ft_atoi_err.c ./srcs/utils/ft_bzero.c ./srcs/utils/get_time.c ./srcs/utils/print_log_mutex.c ./srcs/utils/ft_usleep.c
+SRC_UTILS=./srcs/utils/ft_atoi_err.c ./srcs/utils/ft_bzero.c ./srcs/utils/get_time.c ./srcs/utils/print_log_mutex.c ./srcs/utils/ft_usleep.c ./srcs/utils/set_accurate_time.c
 
 SRCS=$(SRC_MAIN) $(SRC_CHECK_ARGS) $(SRC_SET_PARAMS) $(SRC_THREAD) $(SRC_ERROR) $(SRC_FT_MALLOC) $(SRC_UTILS)
 OBJS = $(SRCS:.c=.o)

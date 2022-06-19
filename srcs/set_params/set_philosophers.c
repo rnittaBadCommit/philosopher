@@ -24,7 +24,7 @@ void	set_philosopher_arry(t_philosopher *philosopher_arry, \
 		philosopher_arry[i].mutexes = &data->mutexes;
 		philosopher_arry[i].is_simulation_started = &data->is_simulation_started;
 		philosopher_arry[i].is_simulation_finished = &data->is_simutation_finished;
-		philosopher_arry[i].dt = 0;
+		philosopher_arry[i].num_philosopher = data->num_philosophers;
 		i++;
 	}
 }

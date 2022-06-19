@@ -20,8 +20,21 @@ int	main(int argc, char **argv)
 		return (ft_error(&all));
 	if (set_all(&all, argv) != NO_ERR)
 		return (ft_error(&all));
-	if (start_threads(&all) != NO_ERR)
-		return (ft_error(&all));
+	if (all.philosopher_data.num_philosophers == 1)
+	{
+		printf("0 1 has taken a fork\n");
+		printf("%d 1 died\n", all.philosopher_data.time_to_die / 1000);
+	}
+	else if (all.philosopher_data.num_philosophers % 2)
+	{
+		if (start_threads_odd_num(&all) != NO_ERR)
+			return (ft_error(&all));
+	}
+	else 
+	{
+		if (start_threads_even_num(&all) != NO_ERR)
+			return (ft_error(&all));
+	}
 	ft_finalize(&all);
 	return (0);
 }

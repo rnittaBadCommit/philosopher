@@ -29,7 +29,15 @@
 typedef struct s_mutexes
 {
 	pthread_mutex_t	print;
+	pthread_mutex_t	fork_id0;
 }	t_mutexes;
+
+typedef struct s_accurate_time
+{
+	long long int	ideal_time_usec;
+	long long int	actual_time_usec;
+	long long int	dt;
+}	t_accurate_time;
 
 typedef struct s_philosopher
 {
@@ -46,11 +54,11 @@ typedef struct s_philosopher
 	pthread_mutex_t	*fork_left;
 	pthread_mutex_t *fork_right;
 	t_mutexes *mutexes;
+	int				num_eaten;
 	volatile int	*is_simulation_started;
 	volatile int	*is_simulation_finished;
-	long long int	ideal_time_usec;
-	long long int	actual_time_usec;
-	long long int	dt;
+	t_accurate_time	accurate_time;
+	int	num_philosopher;
 }	t_philosopher;
 
 typedef struct s_philosopher_data
@@ -104,15 +112,21 @@ t_philosopher	*make_philosopher_arry(int num_philosophers, \
 void	set_philosopher_arry(t_philosopher *philosopher_arry, \
 	t_philosopher_data *data, pthread_mutex_t *fork);
 
-//process
-t_err	start_threads(t_all *all);
+//thread
+t_err	start_threads_odd_num(t_all *all);
+t_err	start_threads_even_num(t_all *all);
 void	*monitoring_threads(void *p);
 
 //action
-void	philosopher_take_fork(t_philosopher *philosopher);
-void	philosopher_eat(t_philosopher *philosopher);
-void	philosopher_sleep(t_philosopher *philosopher);
-void	philosopher_think(t_philosopher *philosopher);
+void	philosopher_take_fork_odd(t_philosopher *philosopher);
+void	philosopher_eat_odd(t_philosopher *philosopher);
+void	philosopher_sleep_odd(t_philosopher *philosopher);
+void	philosopher_think_odd(t_philosopher *philosopher);
+
+void	philosopher_take_fork_even(t_philosopher *philosopher);
+void	philosopher_eat_even(t_philosopher *philosopher);
+void	philosopher_sleep_even(t_philosopher *philosopher);
+void	philosopher_think_even(t_philosopher *philosopher);
 
 //error
 int		ft_error(t_all *all);
@@ -124,5 +138,6 @@ long long int		ft_get_time_msec();
 long long int		ft_get_time_usec();
 void	print_log_mutex(t_philosopher *philosopher, char *s);
 void	ft_usleep(long long int sleep_time);
+void	update_accurate_time(t_accurate_time *accurate_time, int time_to_action);
 
 #endif

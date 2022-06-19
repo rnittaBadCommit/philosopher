@@ -28,5 +28,6 @@ void	set_philosopher_data(t_philosopher_data *data, \
 	else
 		data->num_eat_time = atoi(argv[5]);
 	pthread_mutex_init(&data->mutexes.print, NULL);
+	pthread_mutex_init(&data->mutexes.fork_id0, NULL);
 	data->is_simutation_finished = 0;
 }

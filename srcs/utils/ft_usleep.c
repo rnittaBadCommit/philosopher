@@ -10,7 +10,7 @@ void	ft_usleep(long long int sleep_time)
 	now = start_time;
 	while (now - start_time < sleep_time)
 	{
-		usleep(10);
+		usleep(1);
 		now = ft_get_time_usec();
 	}
 }
