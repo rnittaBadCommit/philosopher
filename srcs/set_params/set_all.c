@@ -6,7 +6,7 @@
 /*   By: rnitta <rnitta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 15:05:20 by rnitta            #+#    #+#             */
-/*   Updated: 2022/06/19 15:05:21 by rnitta           ###   ########.fr       */
+/*   Updated: 2022/06/19 17:35:18 by rnitta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ t_err	set_all(t_all *all, char **argv)
 	set_philosopher_data(&all->philosopher_data, argv, &all->err);
 	if (all->err)
 		return (all->err);
+	if (all->philosopher_data.num_philosophers == 0)
+		return (NO_ERR);
 	all->fork = make_fork(all->philosopher_data.num_philosophers, &all->err);
 	if (all->err)
 		return (all->err);
